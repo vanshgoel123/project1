@@ -15,6 +15,7 @@ spec:
       containers:
       - name: devops-demo
         image: vansh23100/devops-demo:latest
+        imagePullPolicy: Always
         ports:
         - containerPort: 5000
         readinessProbe:

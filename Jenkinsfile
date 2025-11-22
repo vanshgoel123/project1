@@ -16,7 +16,7 @@ pipeline {
 
     stage('Build Docker Image') {
       steps {
-        sh 'docker build -t ${DOCKERHUB_REPO}:${IMAGE_TAG} .'
+        sh 'docker build --no-cache -t ${DOCKERHUB_REPO}:${IMAGE_TAG} .'
       }
     }
 
