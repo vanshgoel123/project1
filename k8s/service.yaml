@@ -5,8 +5,10 @@ metadata:
 spec:
   selector:
     app: devops-demo
+  type: NodePort
   ports:
-    - protocol: TCP
+    - name: http
+      protocol: TCP
       port: 80
       targetPort: 5000
-  type: ClusterIP
+      nodePort: 30080
