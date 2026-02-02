@@ -1,11 +1,9 @@
 pipeline {
   agent any
-
   environment {
     DOCKERHUB_REPO = "vansh23100/devops-demo"
     IMAGE_TAG = "${env.BUILD_ID}"
   }
-
   stages {
 
     stage('Checkout Code') {
@@ -13,19 +11,11 @@ pipeline {
         checkout scm
       }
     }
-
     stage('Build Docker Image') {
       steps {
         sh 'docker build --no-cache -t ${DOCKERHUB_REPO}:${IMAGE_TAG} .'
       }
     }
-
-    stage('Run Tests') {
-      steps {
-        sh 'echo "Running tests... (none configured)"'
-      }
-    }
-
     stage('Push to Docker Hub') {
       steps {
         withCredentials([usernamePassword(credentialsId: 'dockerhub-creds', usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASS')]) {
@@ -34,7 +24,6 @@ pipeline {
         }
       }
     }
-
     stage('Deploy to Kubernetes') {
       steps {
         sh '''
